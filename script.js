@@ -2,7 +2,7 @@
     const CLUB_WHATSAPP_NUMBER = "6354291705"; // Replace with country code + number, digits only
     const CLUB_INSTAGRAM_URL = "https://www.instagram.com/teenagersclub.ac.in/#";
     const CLUB_FACEBOOK_URL = "https://www.facebook.com/c2r.bolls";
-    const message = "Hi! I’m interested in joining Teenagers – The Celebration Club and would like to know more about Lakshmi Puja 2026.";
+    const message = "Hi! I’m interested in joining Teenagers – The Celebration Club and would like to know more about Lakshmi Puja 2027.";
     const waUrl = `https://wa.me/${CLUB_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     document.querySelectorAll('.whatsapp-link').forEach(link => { link.href = waUrl; if (CLUB_WHATSAPP_NUMBER.includes('X')) { link.addEventListener('click', event => { event.preventDefault(); alert('Please add the club WhatsApp number in script.js before using this button.'); }); } });
     document.querySelector('.instagram-link').href = CLUB_INSTAGRAM_URL;
