@@ -1,5 +1,5 @@
 // TODO: Replace these with the club's official links before publishing.
-    const CLUB_WHATSAPP_NUMBER = "8670306938"; // Replace with country code + number, digits only
+    const CLUB_WHATSAPP_NUMBER = "6354291705"; // Replace with country code + number, digits only
     const CLUB_INSTAGRAM_URL = "https://www.instagram.com/teenagersclub.ac.in/#";
     const CLUB_FACEBOOK_URL = "https://www.facebook.com/c2r.bolls";
     const message = "Hi! I’m interested in joining Teenagers – The Celebration Club and would like to know more about Lakshmi Puja 2026.";
