@@ -41,7 +41,7 @@
             <div class="meta-item"><strong>U.C Sankarara</strong><span>Event venue</span></div>
           </div>
         </div>
-        <div class="poster-wrap reveal"><img class="poster" src="lakshmi-puja-poster.png"
+        <div class="poster-wrap reveal"><img class="poster" src="assets/lakshmi-puja-poster.png"
             alt="Lakshmi Puja invitation poster for Teenagers – The Celebration Club">
           <div class="poster-note">5th Year Celebration<span>Together for 5 years</span></div>
         </div>
@@ -83,7 +83,7 @@
           </div>
           <div class="event-details">
             <div class="detail-row">
-              <div><strong>Date</strong><span>14/10/2027 – 14/10/2027</span></div>
+              <div><strong>Date</strong><span>14/10/2027 – 16/10/2027</span></div>
             </div>
             <div class="detail-row">
               <div><strong>Venue</strong><a class="venue-link"
@@ -95,6 +95,38 @@
               <div><strong>Celebrating</strong><span>5th Year · Together for 5 Years</span></div>
             </div>
             <div><a class="btn btn-outline" href="#join">Interested in joining? <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="invitation-generator" id="personal-invitation">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-kicker">Make it yours</span>
+          <h2>Your personal invitation.</h2>
+          <p>Enter your name and create a personalised Lakshmi Puja invitation to keep or share.</p>
+        </div>
+        <div class="invitation-tool reveal">
+          <form class="invitation-form" id="invitationForm">
+            <label for="guestName">Your name</label>
+            <div class="invitation-input-row">
+              <input id="guestName" name="guestName" type="text" maxlength="32" autocomplete="name"
+                placeholder="Enter your full name" required>
+              <button class="btn btn-primary" type="submit">Generate invitation <span aria-hidden="true">✦</span></button>
+            </div>
+            <p class="invitation-hint">Your name will appear on the invitation. No account or sign-up required.</p>
+            <p class="invitation-error" id="invitationError" role="alert" aria-live="polite"></p>
+          </form>
+          <div class="invitation-result" id="invitationResult" hidden>
+            <div class="invitation-preview-wrap">
+              <canvas id="invitationCanvas" width="1024" height="1536"
+                aria-label="Personalised Lakshmi Puja invitation preview"></canvas>
+            </div>
+            <div class="invitation-result-actions">
+              <p>Your invitation is ready!</p>
+              <button class="btn btn-primary" id="downloadInvitation" type="button">Download invitation <span aria-hidden="true">↓</span></button>
+              <button class="btn btn-outline" id="editInvitation" type="button">Change name</button>
             </div>
           </div>
         </div>
