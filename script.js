@@ -26,3 +26,96 @@
     window.addEventListener('scroll',onScroll,{passive:true});onScroll();backTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
     const observer=('IntersectionObserver' in window)?new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.12}):null;
     document.querySelectorAll('.reveal').forEach(el=>{if(observer)observer.observe(el);else el.classList.add('visible')});
+
+
+// Personalised Lakshmi Puja invitation generator (client-side; no server required).
+(() => {
+  const form = document.getElementById('invitationForm');
+  if (!form) return;
+
+  const nameInput = document.getElementById('guestName');
+  const error = document.getElementById('invitationError');
+  const result = document.getElementById('invitationResult');
+  const canvas = document.getElementById('invitationCanvas');
+  const ctx = canvas.getContext('2d');
+  const downloadButton = document.getElementById('downloadInvitation');
+  const editButton = document.getElementById('editInvitation');
+  const poster = new Image();
+  poster.src = 'assets/lakshmi-puja-poster.png';
+
+  let currentName = '';
+  let posterReady = false;
+  poster.addEventListener('load', () => { posterReady = true; });
+  poster.addEventListener('error', () => {
+    error.textContent = 'The invitation artwork could not be loaded. Please check that the assets folder is uploaded.';
+  });
+
+  function drawInvitation(name) {
+    if (!posterReady) {
+      error.textContent = 'The invitation is still loading. Please try again in a moment.';
+      return false;
+    }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(poster, 0, 0, canvas.width, canvas.height);
+
+    // Replace the original generic invitation line with the recipient's name.
+    const band = ctx.createLinearGradient(215, 0, 810, 0);
+    band.addColorStop(0, '#920700');
+    band.addColorStop(.5, '#a00a00');
+    band.addColorStop(1, '#920700');
+    ctx.fillStyle = band;
+    ctx.fillRect(215, 266, 594, 55);
+
+    const displayText = `Cordially invites ${name}`;
+    let fontSize = 36;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#fff4df';
+    ctx.shadowColor = 'rgba(45, 0, 0, .28)';
+    ctx.shadowBlur = 3;
+    ctx.font = `500 ${fontSize}px Arial, sans-serif`;
+    while (ctx.measureText(displayText).width > 570 && fontSize > 20) {
+      fontSize -= 1;
+      ctx.font = `500 ${fontSize}px Arial, sans-serif`;
+    }
+    ctx.fillText(displayText, 512, 294, 570);
+    ctx.shadowBlur = 0;
+    currentName = name;
+    return true;
+  }
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const name = nameInput.value.trim().replace(/\s+/g, ' ');
+    if (!name) {
+      error.textContent = 'Please enter your name first.';
+      nameInput.focus();
+      return;
+    }
+    if (!/^[\p{L}\p{M} .'-]+$/u.test(name)) {
+      error.textContent = 'Please use letters in your name.';
+      nameInput.focus();
+      return;
+    }
+    error.textContent = '';
+    if (drawInvitation(name)) {
+      result.hidden = false;
+      result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  });
+
+  downloadButton.addEventListener('click', () => {
+    if (!currentName) return;
+    const safeName = currentName.normalize('NFKD').replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '').toLowerCase() || 'guest';
+    const link = document.createElement('a');
+    link.download = `lakshmi-puja-invitation-${safeName}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+
+  editButton.addEventListener('click', () => {
+    result.hidden = true;
+    nameInput.focus();
+    document.getElementById('personal-invitation').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+})();
