@@ -582,7 +582,7 @@ footer {
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: #20b968;
+  background: #030705;
   color: white;
   box-shadow: 0 10px 30px rgba(20, 140, 75, .28);
   transition: transform .2s
